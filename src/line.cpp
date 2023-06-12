@@ -31,4 +31,22 @@ bool Line::operator>(const Line& value){
   return polarAngle > value.polarAngle;
 }
 
+double Line::getX1(){
+  return a.getX();
+}
+
+double Line::getX2(){
+  return b.getX();
+}
+
+double Line::getY1(){
+  return a.getY();
+}
+
+double Line::getY2(){
+  return b.getY();
+}
+
+
+
 

@@ -1,4 +1,5 @@
 #include"convex_hull.hpp"
+#include<iostream>
 
 ConvexHull::ConvexHull(){
   top = nullptr;
@@ -42,4 +43,10 @@ void ConvexHull::clean(){
 
 Line ConvexHull::getTop(){
   return top->item;
+}
+
+bool ConvexHull::isAntiClockWise(Line value){
+  double result = (top->item.getX2()-top->item.getX1())*(value.getY2()- value.getY1()) - (top->item.getY2() - top->item.getY1())*(value.getX2()-value.getX1());
+  std::cout<<result<<"\n";
+  return result > 0;
 }

@@ -9,16 +9,14 @@ ConvexHull * graham(Line* (*sortAlg)(Line*, int, int), Line * values, int first,
     return 0;
   }
   ConvexHull* polygon = new ConvexHull();
-  polygon->stackLine(sorted[0]);
-  polygon->stackLine(sorted[1]);
-  polygon->stackLine(sorted[2]);
+  polygon->stackLine(Line(sorted[0].getA(),sorted[0].getB()));
+  polygon->stackLine(Line(sorted[0].getB(),sorted[1].getB()));
 
-  for(int i = 4; i<size; i++){
+  for(int i = 2; i<size; i++){
     Line test = sorted[i];
-    while(Line(polygon->getTop().getB(), test.getB()).getPolarAngle() < 0)
+    while(!polygon->isAntiClockWise(Line(polygon->getTop().getB(),test.getB())))
       polygon->unstack();
-    polygon->stackLine(test);
+    polygon->stackLine(Line(polygon->getTop().getB(),test.getB()));
   }
   return polygon;
 }
-

@@ -12,6 +12,7 @@ class ConvexHull {
     void stackLine(Line);
     Line getTop();
     Line unstack();
+    bool isAntiClockWise(Line);
     bool empty();
     void clean();
   private:
