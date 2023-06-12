@@ -5,7 +5,7 @@
 
 
 
-Line* MergeSort(Line* array, int first, int last);
+Line* MergeSort(Line* array, int last);
 Line* Merge(Line* left, Line* right, int nL, int nR);
 
 

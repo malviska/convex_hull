@@ -75,7 +75,7 @@ int main()
   }
   std::cout<<points[lowest].getX()<<" "<< points[lowest].getY()<<'\n';
   Line * calcPolar = Polar(points, num, points[lowest]);
-  ConvexHull* CH = graham(MergeSort,calcPolar,0, num-1);
+  ConvexHull* CH = graham(MergeSort,calcPolar, num-1);
   CH->print();
   delete [] points;
   delete CH;

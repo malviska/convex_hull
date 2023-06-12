@@ -1,8 +1,8 @@
 #include"graham.hpp"
 
 
-ConvexHull * graham(Line* (*sortAlg)(Line*, int, int), Line * values, int first, int size){
-  Line * sorted = sortAlg(values, first, size);
+ConvexHull * graham(Line* (*sortAlg)(Line*, int), Line * values, int size){
+  Line * sorted = sortAlg(values, size);
   if(size < 3){
     std::cout<<"empty convex hull\n";
     return 0;

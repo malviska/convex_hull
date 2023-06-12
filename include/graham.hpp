@@ -5,8 +5,7 @@
 #define GRAHAM_H
 
 
-ConvexHull * graham(Line* (*sortAlg)(Line*, int first, int last), Line * values, int first, int last);
-
+ConvexHull * graham(Line* (*sortAlg)(Line*, int), Line * values, int size);
 
 
 #endif
