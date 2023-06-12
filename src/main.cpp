@@ -3,13 +3,19 @@
 #include<cstring>
 #include"mergesort.hpp"
 #include"convex_hull.hpp"
+#include"graham.hpp"
 
 Line * Polar(Point* values, int num, Point& lowest){
-  Line * calcPolar = new Line[num];
+  Line * calcPolar = new Line[num - 1];
+  int k = 0;
   for(int i = 0; i<num; i++){
-    calcPolar[i] = Line(lowest, values[i]);
-    std::cout<<calcPolar[i].getPolarAngle()<<"\n";
+    if(lowest == values[i])
+      continue;
+    calcPolar[k] = Line(lowest, values[i]);
+    std::cout<<calcPolar[k].getPolarAngle()<<"\n";
+    k++;
   }
+  std::cout<<'\n';
   return calcPolar;
 }
 
@@ -37,7 +43,8 @@ int main()
   FILE *file;
   char buffer[100];
   int maxSize = 100;
-  int num = 0, X, Y, lowest = -1;
+  int num = 0, lowest = -1;
+  double X, Y;
   file = fopen("/home/mak/repos/convex_hull/test.txt", "r");
   if(file == NULL){
     std::cout<<"File not found\n";
@@ -50,7 +57,7 @@ int main()
       points = resize(points, maxSize, num);
       delete [] aux;
     }
-    int value = sscanf(buffer, "%d %d", &X, &Y);
+    int value = sscanf(buffer, "%le %le", &X, &Y);
     if(value != 2){
       std::cout<<"Getting "<<value<<" values in line "<<num<<", only two values per line is permited, aborting.\n";
       delete [] points;
@@ -66,7 +73,10 @@ int main()
     memset(buffer, 0, sizeof(buffer));
   }
   std::cout<<points[lowest].getX()<<" "<< points[lowest].getY()<<'\n';
-  Line * calcPolar = new Line[num];
+  Line * calcPolar = new Line[num - 1];
   calcPolar = Polar(points, num, points[lowest]);
+  ConvexHull* CH = new ConvexHull;
+  CH = graham(MergeSort,calcPolar,0, num-1);
+
   return 0;
 }

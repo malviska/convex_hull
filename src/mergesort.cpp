@@ -29,7 +29,7 @@ Line* Merge(Line* left, Line* right, int nL, int nR){
 
 
 Line* MergeSort(Line* array, int first, int size){
-  if(size > first){
+  if(size > 1){
     int mid = (size - first)/2;
     int i;
     int sizeR = (size % 2 == 1) ? mid +1 : mid;
@@ -38,11 +38,11 @@ Line* MergeSort(Line* array, int first, int size){
       left[i] = array[i];
     }
     for(; i< size; i++){
-      right[i] = array[i];
+      right[i-mid] = array[i];
     }
-    delete array;
-    left = MergeSort(left,first, mid);
-    right = MergeSort(right, mid, size);
+    delete [] array;
+    left = MergeSort(left,0, mid);
+    right = MergeSort(right, 0, sizeR);
     return Merge(left,right, mid, sizeR);
   }
   return array;

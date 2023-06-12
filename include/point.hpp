@@ -6,11 +6,12 @@ class Point
   public:
     int getX();
     int getY();
-    Point(int x, int y);
+    Point(double x, double y);
     Point();
+    bool operator==(const Point&);
   private:
-    int X;
-    int Y;
+    double X;
+    double Y;
 };  
 
 

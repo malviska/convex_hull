@@ -1,6 +1,7 @@
+#include"line.hpp"
+
 #ifndef CELL_H
 #define CELL_H
-#include"line.hpp"
 
 class Cell {
   public:

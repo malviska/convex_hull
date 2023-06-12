@@ -1,7 +1,8 @@
-#ifndef CONVEX_HULL_H
-#define CONVEX_HULL_H
 #include"line.hpp"
 #include"cell.hpp"
+
+#ifndef CONVEX_HULL_H
+#define CONVEX_HULL_H
 
 class ConvexHull {
   public:
