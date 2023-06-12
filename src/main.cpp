@@ -4,6 +4,16 @@
 #include"mergesort.hpp"
 #include"convex_hull.hpp"
 
+Line * Polar(Point* values, int num, Point& lowest){
+  Line * calcPolar = new Line[num];
+  for(int i = 0; i<num; i++){
+    calcPolar[i] = Line(lowest, values[i]);
+    std::cout<<calcPolar[i].getPolarAngle()<<"\n";
+  }
+  return calcPolar;
+}
+
+
 Point* resize(Point* values, int& maxSize, int num){
   maxSize *= 10;
   Point* newArray = new Point[maxSize*10];
@@ -56,6 +66,7 @@ int main()
     memset(buffer, 0, sizeof(buffer));
   }
   std::cout<<points[lowest].getX()<<" "<< points[lowest].getY()<<'\n';
-  
+  Line * calcPolar = new Line[num];
+  calcPolar = Polar(points, num, points[lowest]);
   return 0;
 }

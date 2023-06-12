@@ -32,7 +32,8 @@ Line* MergeSort(Line* array, int first, int size){
   if(size > first){
     int mid = (size - first)/2;
     int i;
-    Line *right, *left;
+    int sizeR = (size % 2 == 1) ? mid +1 : mid;
+    Line *right = new Line[sizeR], *left = new Line[mid];
     for(i = 0; i < mid; i++){
       left[i] = array[i];
     }
@@ -42,8 +43,8 @@ Line* MergeSort(Line* array, int first, int size){
     delete array;
     left = MergeSort(left,first, mid);
     right = MergeSort(right, mid, size);
-    int sizeR = (size % 2 == 1) ? mid +1 : mid;
     return Merge(left,right, mid, sizeR);
   }
+  return array;
 
 }

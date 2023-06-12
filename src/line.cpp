@@ -7,7 +7,7 @@ Line::Line(Point _A, Point _B){
 }
 
 void Line::calculePolarAngle(){
-  int _polarAngle = a.getX() * b.getY() - a.getY() * b.getX();
+  int _polarAngle = (b.getY()- a.getY());
   polarAngle = _polarAngle;
 }
 
