@@ -23,6 +23,8 @@ Line* Merge(Line* left, Line* right, int nL, int nR){
       k++;
     }
   }
+  delete [] left;
+  delete [] right;
   return result;
 }
 

@@ -22,12 +22,12 @@ Line * Polar(Point* values, int num, Point& lowest){
 }
 
 
-Point* resize(Point* values, int& maxSize, int num){
-  maxSize *= 10;
-  Point* newArray = new Point[maxSize*10];
-  for(int i = 0; i <= num; i++){
+Point* resize(Point* values, int maxSize, int num){
+  Point* newArray = new Point[maxSize];
+  for(int i = 0; i < num; i++){
     newArray[i] = values[i];
   }
+  delete [] values;
   return newArray;
 }
 
@@ -54,7 +54,8 @@ int main()
   }
   Point * points = new Point[maxSize];
   while(fgets(buffer, sizeof(buffer), file) != NULL){
-    if(maxSize < num){
+    if(maxSize <= num){
+      maxSize *= 10;
       points = resize(points, maxSize, num);
     }
     int value = sscanf(buffer, "%le %le", &X, &Y);
@@ -73,11 +74,10 @@ int main()
     memset(buffer, 0, sizeof(buffer));
   }
   std::cout<<points[lowest].getX()<<" "<< points[lowest].getY()<<'\n';
-  Line * calcPolar = new Line[num - 1];
-  calcPolar = Polar(points, num, points[lowest]);
-  ConvexHull* CH = new ConvexHull;
-  CH = graham(MergeSort,calcPolar,0, num-1);
+  Line * calcPolar = Polar(points, num, points[lowest]);
+  ConvexHull* CH = graham(MergeSort,calcPolar,0, num-1);
   CH->print();
+  delete [] points;
   delete CH;
   return 0;
 }
