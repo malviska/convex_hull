@@ -1,5 +1,6 @@
 #include"line.hpp"
 #include"cell.hpp"
+#include<iostream>
 
 #ifndef CONVEX_HULL_H
 #define CONVEX_HULL_H
@@ -15,6 +16,8 @@ class ConvexHull {
     bool isAntiClockWise(Line);
     bool empty();
     void clean();
+    void print();
+
   private:
     Cell* top;
     int size;

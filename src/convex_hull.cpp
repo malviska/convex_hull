@@ -1,5 +1,4 @@
 #include"convex_hull.hpp"
-#include<iostream>
 
 ConvexHull::ConvexHull(){
   top = nullptr;
@@ -47,6 +46,20 @@ Line ConvexHull::getTop(){
 
 bool ConvexHull::isAntiClockWise(Line value){
   double result = (top->item.getX2()-top->item.getX1())*(value.getY2()- value.getY1()) - (top->item.getY2() - top->item.getY1())*(value.getX2()-value.getX1());
-  std::cout<<result<<"\n";
+  
   return result > 0;
+}
+
+void ConvexHull::print(){
+  std::cout<<"FECHO CONVEXO:\n";
+  Line value = Line();
+  int max = size;
+  value = unstack();
+  std::cout<<value.getX2()<<" "<<value.getY2()<<'\n';
+  for(int i = 0; i < max; i++){
+    std::cout<<value.getX1()<<" "<<value.getY1()<<'\n';
+    if(empty())
+      break;
+    value = unstack();
+  }
 }

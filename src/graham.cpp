@@ -18,5 +18,6 @@ ConvexHull * graham(Line* (*sortAlg)(Line*, int, int), Line * values, int first,
       polygon->unstack();
     polygon->stackLine(Line(polygon->getTop().getB(),test.getB()));
   }
+  delete [] sorted;
   return polygon;
 }

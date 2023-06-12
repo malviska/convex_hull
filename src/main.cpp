@@ -12,6 +12,8 @@ Line * Polar(Point* values, int num, Point& lowest){
     if(lowest == values[i])
       continue;
     calcPolar[k] = Line(lowest, values[i]);
+    if(calcPolar[k].getX2() == 21)
+      std::cout<<"problem source\n";
     std::cout<<calcPolar[k].getPolarAngle()<<"\n";
     k++;
   }
@@ -53,9 +55,7 @@ int main()
   Point * points = new Point[maxSize];
   while(fgets(buffer, sizeof(buffer), file) != NULL){
     if(maxSize < num){
-      Point * aux = points;
       points = resize(points, maxSize, num);
-      delete [] aux;
     }
     int value = sscanf(buffer, "%le %le", &X, &Y);
     if(value != 2){
@@ -77,6 +77,7 @@ int main()
   calcPolar = Polar(points, num, points[lowest]);
   ConvexHull* CH = new ConvexHull;
   CH = graham(MergeSort,calcPolar,0, num-1);
-
+  CH->print();
+  delete CH;
   return 0;
 }
