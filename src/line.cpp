@@ -1,5 +1,10 @@
 #include"line.hpp"
 
+Line::Line(){
+  polarAngle = 3;
+  polar = 900000;
+}
+
 Line::Line(Point _A, Point _B){
   a = _A;
   b = _B;
@@ -8,6 +13,8 @@ Line::Line(Point _A, Point _B){
 
 void Line::calculePolarAngle(){
   double _polarAngle = (b.getY()- a.getY())/(sqrt(pow(b.getX() - a.getX(), 2)+pow(b.getY()- a.getY(), 2)));
+  double cosAngle = (b.getX()- a.getX())/(sqrt(pow(b.getX() - a.getX(), 2)+pow(b.getY()- a.getY(), 2)));
+  polar = _polarAngle;
   if(a.getX() > b.getX()){
     _polarAngle = 2 - _polarAngle;
   }
@@ -50,6 +57,9 @@ double Line::getY2(){
   return b.getY();
 }
 
+double Line::angle(){
+  return polar;
+}
 
 
 

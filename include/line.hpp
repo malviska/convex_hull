@@ -7,11 +7,12 @@
 class Line 
 {
   public:
-    Line(){}
+    Line();
     Line(Point a, Point b);
     Point getB();
     Point getA();
     double getPolarAngle();
+    double angle();
     double getX1();
     double getX2();
     double getY1();
@@ -21,6 +22,7 @@ class Line
   private:
     Point a;
     Point b;
+    double polar;
     double polarAngle;
     void calculePolarAngle();
 };

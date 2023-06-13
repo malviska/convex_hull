@@ -4,23 +4,7 @@
 #include"mergesort.hpp"
 #include"convex_hull.hpp"
 #include"graham.hpp"
-
-Line * Polar(Point* values, int num, Point& lowest){
-  Line * calcPolar = new Line[num - 1];
-  int k = 0;
-  for(int i = 0; i<num; i++){
-    if(lowest == values[i])
-      continue;
-    calcPolar[k] = Line(lowest, values[i]);
-    if(calcPolar[k].getX2() == 21)
-      std::cout<<"problem source\n";
-    std::cout<<calcPolar[k].getPolarAngle()<<"\n";
-    k++;
-  }
-  std::cout<<'\n';
-  return calcPolar;
-}
-
+#include"jarvis.hpp"
 
 Point* resize(Point* values, int maxSize, int num){
   Point* newArray = new Point[maxSize];
@@ -29,6 +13,14 @@ Point* resize(Point* values, int maxSize, int num){
   }
   delete [] values;
   return newArray;
+}
+
+bool isBiggest(Point a, Point b){
+  if(b.getY()> a.getY())
+    return true;
+  if(b.getY() == a.getY())
+    return b.getX() > a.getX();
+  return false;
 }
 
 bool isLowest(Point a, Point b){
@@ -45,7 +37,7 @@ int main()
   FILE *file;
   char buffer[100];
   int maxSize = 100;
-  int num = 0, lowest = -1;
+  int num = 0, lowest = -1, biggest = -1;
   double X, Y;
   file = fopen("/home/mak/repos/convex_hull/test.txt", "r");
   if(file == NULL){
@@ -67,15 +59,17 @@ int main()
     points[num] = Point(X,Y);
     if(lowest == -1){
       lowest = num;
+      biggest = num;
     }else if(isLowest(points[lowest], points[num])){
       lowest = num;
+    }else if(isBiggest(points[biggest], points[num])){
+      biggest = num;
     }
     num++;
     memset(buffer, 0, sizeof(buffer));
   }
-  std::cout<<points[lowest].getX()<<" "<< points[lowest].getY()<<'\n';
-  Line * calcPolar = Polar(points, num, points[lowest]);
-  ConvexHull* CH = graham(MergeSort,calcPolar, num-1);
+  //ConvexHull * CH = graham(MergeSort,points,num, points[lowest]);
+  ConvexHull * CH = jarvis(points, num, points[lowest], points[biggest]);
   CH->print();
   delete [] points;
   delete CH;
