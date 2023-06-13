@@ -5,6 +5,7 @@
 #include"convex_hull.hpp"
 #include"graham.hpp"
 #include"jarvis.hpp"
+#include"insertionsort.hpp"
 
 Point* resize(Point* values, int maxSize, int num){
   Point* newArray = new Point[maxSize];
@@ -58,9 +59,14 @@ int main()
     memset(buffer, 0, sizeof(buffer));
   }
   ConvexHull * CH = graham(MergeSort,points,num, points[lowest]);
-  //ConvexHull * CH = jarvis(points, num, points[lowest]);
   CH->print();
+  ConvexHull * CHJ = jarvis(points, num, points[lowest]);
+  CHJ->print();
+  ConvexHull * CH2 = graham(InsertionSort, points, num, points[lowest]);
+  CH2->print();
   delete [] points;
   delete CH;
+  delete CHJ;
+  delete CH2;
   return 0;
 }

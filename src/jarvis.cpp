@@ -3,7 +3,7 @@
 
 ConvexHull* jarvis(Point* values, int size, Point& lowest){
   ConvexHull* polygon = new ConvexHull();
-  double minValue;
+  double minValue = 0;
   Line val;
   Point Vertex = lowest;
   while(true){
