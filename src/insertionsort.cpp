@@ -1,5 +1,5 @@
 #include"insertionsort.hpp"
-
+//simple insertionsort
 Line * InsertionSort(Line* array, int size){
   int i, j;
   Line aux;
