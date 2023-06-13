@@ -15,8 +15,14 @@ void Line::calculePolarAngle(){
   double _polarAngle = (b.getY()- a.getY())/(sqrt(pow(b.getX() - a.getX(), 2)+pow(b.getY()- a.getY(), 2)));
   double cosAngle = (b.getX()- a.getX())/(sqrt(pow(b.getX() - a.getX(), 2)+pow(b.getY()- a.getY(), 2)));
   polar = _polarAngle;
-  if(a.getX() > b.getX()){
+  if(_polarAngle > 0 && cosAngle < 0){
     _polarAngle = 2 - _polarAngle;
+  }else if(_polarAngle < 0 && cosAngle < 0){
+    _polarAngle = 2 - _polarAngle;
+  }else if(_polarAngle < 0 && cosAngle > 0){
+    _polarAngle = 4 + _polarAngle;
+  }else if(cosAngle == 0 && _polarAngle == -1){
+    _polarAngle = 3;
   }
   polarAngle = _polarAngle;
 }

@@ -1,9 +1,9 @@
 #include"jarvis.hpp"
 
 
-ConvexHull* jarvis(Point* values, int size, Point& lowest, Point& biggest){
+ConvexHull* jarvis(Point* values, int size, Point& lowest){
   ConvexHull* polygon = new ConvexHull();
-  double sign = 1;
+  double minValue;
   Line val;
   Point Vertex = lowest;
   while(true){
@@ -12,19 +12,20 @@ ConvexHull* jarvis(Point* values, int size, Point& lowest, Point& biggest){
       if(values[i] == Vertex)
         continue;
       if(candidate == nullptr){
-        candidate = &values[i];
-        val = Line(Vertex, *candidate);
+        val = Line(Vertex, values[i]);
+        if(val.getPolarAngle()> minValue)
+          candidate = &values[i];
         continue;
       }
       Line valdisney = Line(Vertex, values[i]);
-      if((sign*valdisney.angle() > 0.0) && (sign*valdisney.angle() < sign*val.angle())){
+      if(valdisney.getPolarAngle() > minValue && valdisney < val){
         candidate = &values[i];
         val = valdisney;
       }
     }
-    if(candidate == &biggest) sign = -1;
     if(candidate == &lowest) break;
     Line line = Line(Vertex, *candidate);
+    minValue = line.getPolarAngle();
     polygon->stackLine(line);
     Vertex = *candidate;
     }

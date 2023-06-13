@@ -15,14 +15,6 @@ Point* resize(Point* values, int maxSize, int num){
   return newArray;
 }
 
-bool isBiggest(Point a, Point b){
-  if(b.getY()> a.getY())
-    return true;
-  if(b.getY() == a.getY())
-    return b.getX() > a.getX();
-  return false;
-}
-
 bool isLowest(Point a, Point b){
   if(b.getY()< a.getY())
     return true;
@@ -37,7 +29,7 @@ int main()
   FILE *file;
   char buffer[100];
   int maxSize = 100;
-  int num = 0, lowest = -1, biggest = -1;
+  int num = 0, lowest = -1;
   double X, Y;
   file = fopen("/home/mak/repos/convex_hull/test.txt", "r");
   if(file == NULL){
@@ -59,17 +51,14 @@ int main()
     points[num] = Point(X,Y);
     if(lowest == -1){
       lowest = num;
-      biggest = num;
     }else if(isLowest(points[lowest], points[num])){
       lowest = num;
-    }else if(isBiggest(points[biggest], points[num])){
-      biggest = num;
     }
     num++;
     memset(buffer, 0, sizeof(buffer));
   }
-  //ConvexHull * CH = graham(MergeSort,points,num, points[lowest]);
-  ConvexHull * CH = jarvis(points, num, points[lowest], points[biggest]);
+  ConvexHull * CH = graham(MergeSort,points,num, points[lowest]);
+  //ConvexHull * CH = jarvis(points, num, points[lowest]);
   CH->print();
   delete [] points;
   delete CH;
